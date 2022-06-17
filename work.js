@@ -15,23 +15,23 @@
 
  /// Первый вариант решения с исключением всех null
 function filter1(arr){
-  let coursesSort = courses.map((course)=>{return {name: course.name, prices: course.prices.filter((price) => price !== null )}})
+  let coursesSort = courses.map((course)=>{return {...course, prices: course.prices.filter((price) => price !== null )}})
   if(arr.every((num)=> num ==null)) return courses;
 
-  if(arr[0] == null) return coursesSort.map((course) => {return {name: course.name, prices: course.prices.filter((price) => price <=arr[1])}}).filter((cours)=> cours.prices.length !== 0 )
+  if(arr[0] == null) return coursesSort.map((course) => {return {...course, prices: course.prices.filter((price) => price <=arr[1])}}).filter((cours)=> cours.prices.length !== 0 )
 
-  if(arr[1] == null) return coursesSort.map((course) => {return {name: course.name, prices: course.prices.filter((price) => price >=arr[0])}}).filter((cours)=> cours.prices.length !== 0 )
-  return coursesSort.map((course) => {return {name: course.name, prices: course.prices.filter((price) => +arr[0] <= price && price <= +arr[1])}}).filter((cours)=> cours.prices.length !== 0 )
+  if(arr[1] == null) return coursesSort.map((course) => {return {...course, prices: course.prices.filter((price) => price >=arr[0])}}).filter((cours)=> cours.prices.length !== 0 )
+  return coursesSort.map((course) => {return {...course, prices: course.prices.filter((price) => +arr[0] <= price && price <= +arr[1])}}).filter((cours)=> cours.prices.length !== 0 )
 }
 /// Первый вариант решения с изменением значиния в курсах
 function filter2(arr){
-  let coursesSort = courses.map((course)=>{return {name: course.name, prices: course.prices.map((price,i) => i == 0 && price == null? 0:i == 1 && price == null ? Infinity: price)}})
+  let coursesSort = courses.map((course)=>{return {...course, prices: course.prices.map((price,i) => i == 0 && price == null? 0:i == 1 && price == null ? Infinity: price)}})
  if(arr.every((num)=> num ==null)) return courses;
 
-  if(arr[0] == null) return coursesSort.map((course) => {return {name: course.name, prices: course.prices.filter((price) => price <=arr[1])}}).filter((cours)=> cours.prices.length !== 0 )
+  if(arr[0] == null) return coursesSort.map((course) => {return {...course, prices: course.prices.filter((price) => price <=arr[1])}}).filter((cours)=> cours.prices.length !== 0 )
 
-  if(arr[1] == null) return coursesSort.map((course) => {return {name: course.name, prices: course.prices.filter((price) => price >=arr[0])}}).filter((cours)=> cours.prices.length !== 0 )
-  return coursesSort.map((course) => {return {name: course.name, prices: course.prices.filter((price) => +arr[0] <= price && price <= +arr[1])}}).filter((cours)=> cours.prices.length !== 0 )
+  if(arr[1] == null) return coursesSort.map((course) => {return {...course, prices: course.prices.filter((price) => price >=arr[0])}}).filter((cours)=> cours.prices.length !== 0 )
+  return coursesSort.map((course) => {return {...course, prices: course.prices.filter((price) => +arr[0] <= price && price <= +arr[1])}}).filter((cours)=> cours.prices.length !== 0 )
 }
 ///сортировка по минимальной цене
 
@@ -43,4 +43,4 @@ function sortMax(){
 return courses.sort((a,b)=> b.prices[0] - a.prices[0])
 }
 
-
+console.log(filter2(requiredRange3))
